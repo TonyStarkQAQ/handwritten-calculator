@@ -1,0 +1,15 @@
+F:\program\program-3\MnistForm\MnistModel\bin\x64\Debug\Mnist\00000001\manifest.json
+F:\program\program-3\MnistForm\MnistModel\bin\x64\Debug\Mnist\00000001\saved_model.pb
+F:\program\program-3\MnistForm\MnistModel\bin\x64\Debug\Mnist\00000001\variables\variables.data-00000-of-00001
+F:\program\program-3\MnistForm\MnistModel\bin\x64\Debug\Mnist\00000001\variables\variables.index
+F:\program\program-3\MnistForm\MnistModel\bin\x64\Debug\tensorflow.dll
+F:\program\program-3\MnistForm\MnistModel\bin\x64\Debug\mkldnn.dll
+F:\program\program-3\MnistForm\MnistModel\bin\x64\Debug\Microsoft.ML.ScoringNative.dll
+F:\program\program-3\MnistForm\MnistModel\bin\x64\Debug\MnistModel.dll
+F:\program\program-3\MnistForm\MnistModel\bin\x64\Debug\MnistModel.pdb
+F:\program\program-3\MnistForm\MnistModel\bin\x64\Debug\Microsoft.ML.Scoring.dll
+F:\program\program-3\MnistForm\MnistModel\obj\x64\Debug\MnistModel.csprojAssemblyReference.cache
+F:\program\program-3\MnistForm\MnistModel\obj\x64\Debug\MnistModel.csproj.CoreCompileInputs.cache
+F:\program\program-3\MnistForm\MnistModel\obj\x64\Debug\MnistModel.csproj.CopyComplete
+F:\program\program-3\MnistForm\MnistModel\obj\x64\Debug\MnistModel.dll
+F:\program\program-3\MnistForm\MnistModel\obj\x64\Debug\MnistModel.pdb
