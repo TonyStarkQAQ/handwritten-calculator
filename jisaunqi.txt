@@ -1,0 +1,166 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace jisuanqi1
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+        double num = 0;      //用来保存上一个的数据
+        double temp = 0;     //用来表示第二个数据
+        double result = 0;    //用来保存结果
+        int pos = 0;          //用来保存运算符
+        bool DotFlage = false;   //保存小数点
+
+        public void addnum(int m)
+        {
+            if(DotFlage == false)
+                textBox1.Text = textBox1.Text + m.ToString();
+            else
+            {
+                textBox1.Text = textBox1.Text +".";
+                DotFlage = false;
+            }
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            addnum(1);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            addnum(2);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            addnum(3);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            addnum(4);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            addnum(5);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            addnum(6);
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            addnum(7);
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            addnum(8);
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            addnum(9);
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            addnum(0);
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            DotFlage = true;
+            addnum(-1);        //调用addnum 模块  实现小数点的出现
+        }
+        //加法
+        private void button12_Click(object sender, EventArgs e)
+        {
+            pos = 1;
+            num  = Convert.ToDouble(textBox1.Text);
+            textBox1.Text = " " ;
+        }
+        //减法
+        private void button13_Click(object sender, EventArgs e)
+        {
+            pos = 2;
+            num = Convert.ToDouble(textBox1.Text);
+            textBox1.Text = " ";
+        }
+        //乘法
+        private void button14_Click(object sender, EventArgs e)
+        {
+            pos = 3;
+            num = Convert.ToDouble(textBox1.Text);
+            textBox1.Text = " ";
+        }
+        //除法
+        private void button15_Click(object sender, EventArgs e)
+        {
+            pos = 4;
+            num = Convert.ToDouble(textBox1.Text);
+            textBox1.Text = " ";
+        }
+        //清零
+        private void button16_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = "";
+            temp = 0;
+            num = 0;
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            temp= Convert.ToDouble(textBox1.Text);
+            if (temp != 0)
+                switch (pos)
+                {
+                    case 1:
+                        textBox1.Text = Convert.ToString(num + temp);
+                        break;
+                    case 2:
+                        textBox1.Text = Convert.ToString(num - temp);
+                        break;
+                    case 3:
+                        textBox1.Text = Convert.ToString(num * temp);
+                        break;
+                    case 4:
+                        textBox1.Text = Convert.ToString(num / temp);
+                        break;
+                }
+            else
+                textBox1.Text = "除法错误";
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = "";
+            temp = 0;
+            num = 0;
+        }
+
+
+        private void menuStrip2_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+    }
+}
