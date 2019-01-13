@@ -1,0 +1,102 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using MnistModel;
+
+namespace jisuanqi1
+{
+    public partial class handwrite : Form
+    {
+        public handwrite()
+        {
+            InitializeComponent();
+        }
+        private Bitmap digitImage;//用来保存手写数字
+        private Point startPoint;//用于绘制线段，作为线段的初始端点坐标
+        private Mnist model;//用于识别手写数字
+        private const int MnistImageSize = 28;//Mnist模型所需的输入图片大小
+
+        private void handwrite_Load(object sender, EventArgs e)
+        {
+            //当窗口加载时，绘制一个白色方框
+            model = new Mnist();
+            digitImage = new Bitmap(handing.Width, handing.Height);
+            Graphics g = Graphics.FromImage(digitImage);
+            g.Clear(Color.White);
+            handing.Image = digitImage;
+        }
+
+        private void handing_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void clear_Click(object sender, EventArgs e)
+        {
+            //当点击清除时，重新绘制一个白色方框，同时清除label1显示的文本
+            digitImage = new Bitmap(handing.Width, handing.Height);
+            Graphics g = Graphics.FromImage(digitImage);
+            g.Clear(Color.White);
+            handing.Image = digitImage;
+            display.Text = "";
+        }
+
+        private void handing_MouseDown(object sender, MouseEventArgs e)
+        {
+            //当鼠标左键被按下时，设置isPainting为true，并记录下需要绘制的线段的起始坐标
+            startPoint = (e.Button == MouseButtons.Left) ? e.Location : startPoint;
+        }
+
+        private void handing_MouseMove(object sender, MouseEventArgs e)
+        {
+            //当鼠标在移动，且当前处于绘制状态时，根据鼠标的实时位置与记录的起始坐标绘制线段，同时更新需要绘制的线段的起始坐标
+            if (e.Button == MouseButtons.Left)
+            {
+                Graphics g = Graphics.FromImage(digitImage);
+                Pen myPen = new Pen(Color.Black, 40);
+                myPen.StartCap = LineCap.Round;
+                myPen.EndCap = LineCap.Round;
+                g.DrawLine(myPen, startPoint, e.Location);
+                handing.Image = digitImage;
+                g.Dispose();
+                startPoint = e.Location;
+            }
+        }
+
+        private void handing_MouseUp(object sender, MouseEventArgs e)
+        {
+            //当鼠标左键释放时
+            //同时开始处理图片进行推理
+            if (e.Button == MouseButtons.Left)
+            {
+                // 复制pictureBox中的图片并缩放到28*28成为新的图片(tmpBmp)
+                Bitmap tmpBmp = new Bitmap(digitImage, MnistImageSize, MnistImageSize);
+                //将图片转为灰阶图，并将图片的像素信息保存在list中
+                var imageData = new List<float>(MnistImageSize * MnistImageSize);
+                for (var y = 0; y < MnistImageSize; y++)
+                {
+                    for (var x = 0; x < MnistImageSize; x++)
+                    {
+                        var color = tmpBmp.GetPixel(x, y);
+                        var pixel = (float)(0.5 - (color.R + color.G + color.B) / (3.0 * 255));
+                        imageData.Add(pixel);
+                    }
+                }
+                //将图片信息包装为mnist模型规定的输入格式
+                var batchData = new List<IEnumerable<float>>();
+                batchData.Add(imageData);
+                //将图片传送给mnist模型进行推理
+                var result = model.Infer(batchData);
+                //将推理结果输出
+                display.Text = result.First().First().ToString();
+            }
+        }
+    }
+}
